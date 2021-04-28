@@ -197,9 +197,11 @@ if test $# -ne 0 && test -z "$dir_arg$dst_arg"; then
   done
 fi
 
+echo "$#"
+
 if test $# -eq 0; then
   if test -z "$dir_arg"; then
-    echo "$0: no input file specified." >&2
+    echo "$0: hz- no input file specified." >&2
     exit 1
   fi
   # It's OK to call 'install-sh -d' without argument.

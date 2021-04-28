@@ -11,7 +11,8 @@
 #include <stdlib.h>
 #include "pin.H"
 #include <map>
-#include <tr1/unordered_map>
+#include <unordered_map> //hz- 
+// #include <tr1/unordered_map> //hz- 
 #include <list>
 #include <inttypes.h>
 #include <stdint.h>
@@ -44,7 +45,7 @@
 
 #ifdef USE_BOOST
 #include <boost/filesystem.hpp>
-#include <boost/lexical_cast.hpp>
+#include <boost/lexical_cast.hpp> // hz-
 #include <boost/algorithm/string.hpp>
 #endif
 
@@ -53,7 +54,7 @@
 #include <libelf/gelf.h>
 #elif defined(TARGET_LINUX)
 #include <libelf.h>
-#include <gelf.h>
+#include <libelf/gelf.h> // hz-
 #else
 "Unsupported platform"
 #endif
@@ -742,7 +743,7 @@ namespace PinCCTLib {
         PIN_GetLock(&GLOBAL_STATE.lock, threadid + 1);
         GLOBAL_STATE.numThreads++;
         PIN_ReleaseLock(&GLOBAL_STATE.lock);
-        ThreadData* tdata = new ThreadData();
+        ThreadData* tdata = new ThreadData();// hz-
         CCTLibInitThreadData(tdata, ctxt, threadid);
         PIN_SetThreadData(GLOBAL_STATE.CCTLibTlsKey, tdata, threadid);
         ThreadCapturePoint(tdata);
@@ -2110,7 +2111,7 @@ tHandle*/, lineNo /*lineNo*/, ip /*ip*/
 #define PAGE_OFFSET(addr) ( addr & 0xFFFF)
 #define PAGE_OFFSET_MASK ( 0xFFFF)
 
-#define PAGE_SIZE (1 << PAGE_OFFSET_BITS)
+// #define PAGE_SIZE (1 << PAGE_OFFSET_BITS) //limits.h  #define PAGE_SIZE 4096
 
 // 2 level page table
 #define PTR_SIZE (sizeof(struct Status *))
